@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Input, Button, Card, Toast, DotLoading } from 'antd-mobile';
+import { Input, Button, Toast, DotLoading } from 'antd-mobile';
 import { useRequest } from 'ahooks';
 import styles from './index.module.less';
-import request from '../../utils/request'
-import { Helmet } from 'react-helmet-async'
+import request from '../../utils/request';
+import { Helmet } from 'react-helmet-async';
+import ChatMessages from '../../components/ChatMessages';
 
 interface Message {
   role: 'user' | 'ai';
@@ -95,36 +96,7 @@ const ChatDetail: React.FC = () => {
       <Helmet>
         <title>对话详情 - AI助手</title>
       </Helmet>
-      <div className={styles.messageList} ref={messageListRef}>
-        {messages.map((message, index) => (
-          <div
-            key={`${index}-${message.role}-${message.content.slice(0, 10)}`}
-            className={styles.messageItem}
-            style={{
-              flexDirection: message.role === 'user' ? 'row-reverse' : 'row',
-            }}
-          >
-            <div
-              className={styles.avatar}
-              style={{
-                background:
-                  message.role === 'user' ? '#fff' : 'rgba(22, 119, 255, 0.1)',
-                color: '#1677ff',
-                border: '1px solid rgba(22, 119, 255, 0.1)',
-              }}
-            >
-              {message.role === 'user' ? '我' : 'AI'}
-            </div>
-            <Card
-              className={`${styles.messageCard} ${
-                message.role === 'user' ? styles.userMessage : styles.aiMessage
-              }`}
-            >
-              <div className={styles.text}>{message.content}</div>
-            </Card>
-          </div>
-        ))}
-      </div>
+      <ChatMessages messages={messages} loading={loading} />
       <div className={styles.inputArea}>
         <div className={styles.inputWrapper}>
           <Input

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Input, Button, Card, Toast } from 'antd-mobile';
+import { Input, Button, Toast } from 'antd-mobile';
 import { useRequest } from 'ahooks';
 import styles from './index.module.less';
 import request from '../../utils/request';
-import { Helmet } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async';
+import ChatMessages from '../../components/ChatMessages';
 
 interface Message {
   role: 'user' | 'ai';
@@ -123,49 +124,15 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        <div className={styles.messageList} ref={messageListRef}>
-          {!conversationId ? (
-            <div className={styles.emptyState}>点击「新对话」按钮开始聊天</div>
-          ) : messages.length === 0 ? (
-            <div className={styles.emptyState}>
-              {latestLoading ? '加载中...' : '开始一个新的对话吧'}
-            </div>
-          ) : (
-            messages.map((message, index) => (
-              <div
-                key={`${index}-${message.role}-${message.content.slice(0, 10)}`}
-                className={styles.messageItem}
-                style={{
-                  flexDirection:
-                    message.role === 'user' ? 'row-reverse' : 'row',
-                }}
-              >
-                <div
-                  className={styles.avatar}
-                  style={{
-                    background:
-                      message.role === 'user'
-                        ? '#fff'
-                        : 'rgba(22, 119, 255, 0.1)',
-                    color: message.role === 'user' ? '#1677ff' : '#1677ff',
-                    border: '1px solid rgba(22, 119, 255, 0.1)',
-                  }}
-                >
-                  {message.role === 'user' ? '我' : 'AI'}
-                </div>
-                <Card
-                  className={`${styles.messageCard} ${
-                    message.role === 'user'
-                      ? styles.userMessage
-                      : styles.aiMessage
-                  }`}
-                >
-                  <div className={styles.text}>{message.content}</div>
-                </Card>
-              </div>
-            ))
-          )}
-        </div>
+        <ChatMessages
+          messages={messages}
+          loading={latestLoading}
+          emptyText={
+            !conversationId
+              ? '点击「新对话」按钮开始聊天'
+              : '开始一个新的对话吧'
+          }
+        />
 
         <div className={styles.inputArea}>
           <div className={styles.inputWrapper}>
