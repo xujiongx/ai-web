@@ -3,6 +3,7 @@ import BasicLayout from '../layouts/BasicLayout';
 import Home from '../pages/Home';
 import Chat from '../pages/Chat';
 import Profile from '../pages/Profile';
+import ChatDetail from '../pages/ChatDetail';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '/chat/:id',
+    element: <ChatDetail />
+  }
 ]);
 
 export default router;
