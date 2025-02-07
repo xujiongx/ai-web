@@ -1,16 +1,15 @@
 import React from 'react';
 import { List, DotLoading } from 'antd-mobile';
 import { useRequest } from 'ahooks';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './index.module.less';
+import request from '../../utils/request';
+import { Helmet } from 'react-helmet-async';
 
 const Chat: React.FC = () => {
   const navigate = useNavigate();
   const { data, loading } = useRequest(async () => {
-    const response = await axios.get(
-      'http://192.168.1.63:3001/mistral/conversations'
-    );
+    const response = await request.get('/mistral/conversations');
     return response.data;
   });
 
@@ -24,6 +23,9 @@ const Chat: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <Helmet>
+        <title>对话列表 - AI助手</title>
+      </Helmet>
       <List className={styles.list}>
         {data?.map(
           (conversation: {

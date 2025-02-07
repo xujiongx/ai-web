@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Input, Button, Card, Toast, DotLoading } from 'antd-mobile';
 import { useRequest } from 'ahooks';
-import axios from 'axios';
 import styles from './index.module.less';
+import request from '../../utils/request'
+import { Helmet } from 'react-helmet-async'
 
 interface Message {
   role: 'user' | 'ai';
@@ -29,7 +30,7 @@ const ChatDetail: React.FC = () => {
 
   const { loading } = useRequest(
     async () => {
-      const response = await axios.get(
+      const response = await request.get(
         `http://192.168.1.63:3001/mistral/conversations/${id}`
       );
       return response.data;
@@ -48,7 +49,7 @@ const ChatDetail: React.FC = () => {
 
   const { loading: sendLoading, run: sendMessage } = useRequest(
     async (content: string) => {
-      const res = await axios.get('http://192.168.1.63:3001/mistral', {
+      const res = await request.get('http://192.168.1.63:3001/mistral', {
         params: { content, sessionId: id },
       });
       return res.data.data;
@@ -91,6 +92,9 @@ const ChatDetail: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <Helmet>
+        <title>对话详情 - AI助手</title>
+      </Helmet>
       <div className={styles.messageList} ref={messageListRef}>
         {messages.map((message, index) => (
           <div

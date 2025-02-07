@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
 import { Input, Button, Card, Toast } from 'antd-mobile';
 import { useRequest } from 'ahooks';
 import styles from './index.module.less';
+import request from '../../utils/request';
+import { Helmet } from 'react-helmet-async'
 
 interface Message {
   role: 'user' | 'ai';
@@ -17,7 +18,7 @@ const Home: React.FC = () => {
 
   // 获取最近对话
   const { data: latestData, loading: latestLoading } = useRequest(async () => {
-    const response = await axios.get('http://192.168.1.63:3001/mistral/latest');
+    const response = await request.get('/mistral/latest');
     return response.data;
   });
 
@@ -35,10 +36,8 @@ const Home: React.FC = () => {
   useEffect(() => {
     if (latestData?.data) {
       setConversationId(latestData.data);
-      axios
-        .get(
-          `http://192.168.1.63:3001/mistral/conversations/${latestData.data}`
-        )
+      request
+        .get(`/mistral/conversations/${latestData.data}`)
         .then((response) => {
           setMessages(response.data.data || []);
         })
@@ -64,7 +63,7 @@ const Home: React.FC = () => {
 
   const { loading, run } = useRequest(
     async (content: string) => {
-      const res = await axios.get('http://192.168.1.63:3001/mistral', {
+      const res = await request.get('http://192.168.1.63:3001/mistral', {
         params: { content, sessionId: conversationId },
       });
       return res.data.data;
@@ -101,6 +100,9 @@ const Home: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <Helmet>
+        <title>AI助手</title>
+      </Helmet>
       <div className={styles.content}>
         <div className={styles.header}>
           <div className={styles.headerLeft}>

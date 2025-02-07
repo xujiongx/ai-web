@@ -4,8 +4,13 @@ import Home from '../pages/Home';
 import Chat from '../pages/Chat';
 import Profile from '../pages/Profile';
 import ChatDetail from '../pages/ChatDetail';
+import Login from '../pages/Login';
 
 const router = createBrowserRouter([
+  {
+    path: '/login',
+    element: <Login />,
+  },
   {
     path: '/',
     element: <BasicLayout />,
