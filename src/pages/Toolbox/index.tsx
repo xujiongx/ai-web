@@ -9,6 +9,7 @@ import {
 } from 'antd-mobile-icons';
 import { Helmet } from 'react-helmet-async'
 import styles from './index.module.less'
+import { useNavigate } from 'react-router-dom';
 const tools = [
   {
     icon: <MessageOutline />,
@@ -38,8 +39,10 @@ const tools = [
 ];
 
 const Toolbox: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleToolClick = (path: string) => {
-    window.location.href = path;
+    navigate(path);
   };
 
   return (

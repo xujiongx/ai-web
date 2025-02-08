@@ -7,6 +7,7 @@ import ChatDetail from '../pages/ChatDetail';
 import Login from '../pages/Login';
 import Toolbox from '../pages/Toolbox';
 import Couplet from '../pages/Couplet';
+import Translate from '../pages/Translate';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
     ],
+  },
+  {
+    path: 'translate',
+    element: <Translate />,
   },
   {
     path: '/chat/:id',
