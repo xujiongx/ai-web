@@ -3,6 +3,7 @@ import { Toast } from 'antd-mobile';
 
 const request = axios.create({
   baseURL: 'http://192.168.1.63:3001',
+  // baseURL: '  https://9d4a-113-89-235-143.ngrok-free.app',
   timeout: 10000,
 });
 
