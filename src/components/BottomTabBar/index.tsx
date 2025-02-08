@@ -3,7 +3,8 @@ import { TabBar } from 'antd-mobile';
 import { 
   MessageOutline,
   AppOutline,
-  UserOutline
+  UserOutline,
+  LocationOutline
 } from 'antd-mobile-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './index.module.less';
@@ -22,6 +23,11 @@ const BottomTabBar: React.FC = () => {
       key: '/chat',
       icon: <MessageOutline />,
       title: '聊天',
+    },
+    {
+      key: '/toolbox',
+      icon: <LocationOutline />,
+      title: '工具箱',
     },
     {
       key: '/profile',

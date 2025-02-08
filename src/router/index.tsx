@@ -5,6 +5,8 @@ import Chat from '../pages/Chat';
 import Profile from '../pages/Profile';
 import ChatDetail from '../pages/ChatDetail';
 import Login from '../pages/Login';
+import Toolbox from '../pages/Toolbox';
+import Couplet from '../pages/Couplet';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,10 @@ const router = createBrowserRouter([
         element: <Chat />,
       },
       {
+        path: '/toolbox',
+        element: <Toolbox />,
+      },
+      {
         path: '/profile',
         element: <Profile />,
       },
@@ -31,8 +37,12 @@ const router = createBrowserRouter([
   },
   {
     path: '/chat/:id',
-    element: <ChatDetail />
-  }
+    element: <ChatDetail />,
+  },
+  {
+    path: '/couplet',
+    element: <Couplet />,
+  },
 ]);
 
 export default router;

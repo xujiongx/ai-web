@@ -1,0 +1,114 @@
+// 定义主题色
+@chinese-red: #d40000;
+@chinese-red-dark: #a00000;
+@chinese-gold: #f5c400;
+@chinese-bg: #fff6e5;
+
+.decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.lanternLeft, .lanternRight {
+  position: absolute;
+  top: 60px;
+  width: 60px;
+  height: 90px;
+  transform-origin: top center;
+}
+
+.lanternLeft {
+  left: 50px;
+  animation: swingLeft 3s ease-in-out infinite;
+}
+
+.lanternRight {
+  right: 50px;
+  animation: swingRight 3s ease-in-out infinite;
+}
+
+.lanternString {
+  stroke: @chinese-gold;
+  stroke-width: 2;
+  fill: none;
+}
+
+.lanternBody {
+  fill: @chinese-red;
+  stroke: @chinese-gold;
+  stroke-width: 2;
+}
+
+.lanternTop, .lanternBottom {
+  fill: @chinese-gold;
+}
+
+.lanternText {
+  fill: #fff;
+  font-size: 36px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  font-family: "楷体", "KaiTi", serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.firecracker {
+  position: absolute;
+  bottom: -20px;
+  right: -40px;
+  width: 60px;
+  height: 60px;
+  z-index: 1;
+}
+
+.firecrackerGroup {
+  transform-origin: center;
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+.firecrackerBody {
+  fill: @chinese-red;
+  stroke: @chinese-gold;
+  stroke-width: 2;
+}
+
+.fuse {
+  fill: @chinese-gold;
+  animation: glow 1s ease-in-out infinite;
+}
+
+.spark {
+  fill: @chinese-gold;
+  animation: sparkle 1.5s ease-out infinite;
+  transform-origin: center;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
+@keyframes sparkle {
+  0% { transform: scale(0); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.8; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+@keyframes swingLeft {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(8deg); }
+}
+
+@keyframes swingRight {
+  0%, 100% { transform: rotate(8deg); }
+  50% { transform: rotate(-8deg); }
+}
